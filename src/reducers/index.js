@@ -1,14 +1,16 @@
 import { RECEIVE_LOCATION } from '../actions';
 
 function locations(state = [], action) {
+  const { date, name, aqi, desc, color } = action;
   switch(action.type) {
     case RECEIVE_LOCATION:
       return [
         {
-          date: action.date,
-          name: action.name,
-          aqi: action.aqi,
-          description: action.description
+          date,
+          name,
+          aqi,
+          desc,
+          color
         },
         ...state
       ];

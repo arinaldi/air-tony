@@ -1,25 +1,46 @@
+import { geocodeGoogle, breezoMeter } from '../api';
+
 export const RECEIVE_LOCATION = 'RECEIVE_LOCATION';
 
-export function receiveLocation(location, json) {
-  //dispatching an action to the store
+export function receiveLocation(json) {
+  const { date, name, aqi, desc, color } = json;
   return {
     type: 'RECEIVE_LOCATION',
-    date: json.datetime,
-    name: location,
-    aqi: json.breezometer_aqi,
-    description: json.breezometer_description
+    date,
+    name,
+    aqi,
+    desc,
+    color,
   };
 };
 
 export const fetchLocation = location => {
+  let name;
+
   return dispatch => {
-    const BOM_API_KEY = 'fbbb89795db54612ad9598e2ce77b709';
-    const URL = `https://api.breezometer.com/baqi/?lat=40.7324296&lon=-73.9977264&key=${BOM_API_KEY}&fields=breezometer_aqi,breezometer_color,breezometer_description,datetime`;
-    return fetch(URL)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveLocation(location, json))
+    // TODO: dispatch 'requesting'
+
+    return geocodeGoogle(location)
+      .then(res => {
+        name = res.results[0].formatted_address;
+        const lat = res.results[0].geometry.location.lat;
+        const lng = res.results[0].geometry.location.lng;
+
+        return {lat, lng};
       })
-      .catch(err => {})
+      .then(coords => breezoMeter(coords))
+      .then(res => {
+        const jsonTest = {
+          date: res.datetime,
+          name,
+          aqi: res.breezometer_aqi,
+          desc: res.breezometer_description,
+          color: res.breezometer_color
+        };
+        dispatch(receiveLocation(jsonTest))
+      })
+      .catch(err => {
+        // TODO: dispatch error state
+      })
     }
 };

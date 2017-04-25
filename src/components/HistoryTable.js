@@ -10,6 +10,15 @@ function formatDate(isoDate) {
   return newDate;
 }
 
+function formatDate(isoDate) {
+  const date = new Date(isoDate);
+  const newDate = {
+    date: date.toDateString().substring(4),
+    time: date.toLocaleTimeString()
+  };
+  return newDate;
+}
+
 class HistoryTable extends React.Component {
 
   constructor() {
@@ -23,12 +32,10 @@ class HistoryTable extends React.Component {
       background: location.color
     };
 
-    const formattedDate = formatDate(location.date);
     const { date, time } = formattedDate;
 
      return (
       <tr key={i}>
-        <td>{date}<br/>{time}</td>
         <td>{location.name}</td>
         <td>{location.aqi}</td>
         <td>

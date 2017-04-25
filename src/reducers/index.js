@@ -8,7 +8,8 @@ function locations(state = [], action) {
           date: action.date,
           name: action.name,
           aqi: action.aqi,
-          description: action.description
+          desc: action.desc,
+          color: action.color
         },
         ...state
       ];

@@ -1,6 +1,4 @@
 import { geocodeGoogle, breezoMeter } from '../api';
-import { BOM_API_KEY } from '../constants';
-
 export const RECEIVE_LOCATION = 'RECEIVE_LOCATION';
 
 export function receiveLocation(json) {
@@ -19,11 +17,11 @@ export const fetchLocation = location => {
   let name;
 
   return dispatch => {
-    // TODO: dispatch 'requesting'
 
     return geocodeGoogle(location)
       .then(res => {
         name = res.results[0].formatted_address;
+
         const lat = res.results[0].geometry.location.lat;
         const lng = res.results[0].geometry.location.lng;
 
@@ -39,9 +37,6 @@ export const fetchLocation = location => {
           color: res.breezometer_color
         };
         dispatch(receiveLocation(jsonTest))
-      })
-      .catch(err => {
-        // TODO: dispatch error state
-      })
+      });
     }
 };

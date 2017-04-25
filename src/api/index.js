@@ -38,6 +38,9 @@ function geocode(location) {
 
 }
 
+//1. return the result of geocode
+
+//change to a fetch to convert to a promise
 function breezoMeter(coords) {
   let url = `https://api.breezometer.com/baqi/?lat=${coords.lat}&lon=${coords.lon}&key=${BOM_API_KEY}&fields=breezometer_aqi,datetime,breezometer_color,breezometer_description`;
 

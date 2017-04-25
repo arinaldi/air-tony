@@ -11,8 +11,10 @@ class HistoryTable extends React.Component {
   renderLocation(location, i) {
     return (
       <tr key={i}>
-        <td>{location.location}</td>
-        <td>{location.air}</td>
+        <td>{location.date}</td>
+        <td>{location.name}</td>
+        <td>{location.aqi}</td>
+        <td>{location.description}</td>
       </tr>
     )
   }
@@ -22,13 +24,14 @@ class HistoryTable extends React.Component {
       <table className="u-full-width">
         <thead>
           <tr>
-            <th>Location</th>
-            <th>Air Quality</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>AQI</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
           {this.props.locations.map(this.renderLocation)}
-        {/*console.log(this.props)*/}
         </tbody>
       </table>
     );

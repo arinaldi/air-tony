@@ -6,7 +6,7 @@ class InputForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const location = this.refs.location.value;
-    this.props.addLocation(location);
+    this.props.fetchLocation(location);
     this.refs.locationForm.reset();
   }
 

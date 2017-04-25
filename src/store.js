@@ -7,12 +7,16 @@ const initialState = {
   locations:
   [
     {
-      location: 'Austin, TX',
-      air: 'Good'
+      location: 'Austin, TX, USA',
+      air: 'Excellent'
     },
     {
       location: 'Paris, France',
       air: 'Fair'
+    },
+    {
+      location: 'Berlin, Germany',
+      air: 'Good'
     }
   ]
 };

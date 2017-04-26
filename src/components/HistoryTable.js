@@ -1,14 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
-
-function formatDate(isoDate) {
-  const date = new Date(isoDate);
-  const newDate = {
-    date: date.toDateString().substring(4),
-    time: date.toLocaleTimeString()
-  };
-  return newDate;
-}
+import { formatDate } from '../utilities';
 
 class HistoryTable extends React.Component {
 
@@ -26,6 +17,7 @@ class HistoryTable extends React.Component {
     const formattedDate = formatDate(location.date);
 
      return (
+      // TODO: use UUID
       <tr key={i}>
         <td>{formattedDate.date}<br/>{formattedDate.time}</td>
         <td>{location.name}</td>
@@ -33,7 +25,7 @@ class HistoryTable extends React.Component {
         <td>
           <p className="circle" style={circleStyle}></p> 
         </td>
-        <td>{location.desc}</td>
+        <td>{location.description}</td>
       </tr>
     )
   }

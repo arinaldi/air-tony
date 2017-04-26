@@ -6,25 +6,18 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import reducer from './reducers'
 import AppContainer from './containers/App';
+import { localStorageTest, getHistory } from './utilities';
+
+let currentHistory;
+
+if (localStorageTest()) {
+  currentHistory = getHistory();
+} else {
+  console.error("Local Storage not available.");
+}
 
 const initialState = {
-  locations:
-  [
-    {
-      name: 'Austin, TX, USA',
-      date: 'Tue Apr 25 2017 15:07:18 GMT-0500 (CDT)',
-      aqi: '89',
-      desc: 'great',
-      color: 'green'
-    },
-    {
-      name: 'Paris, France',
-      date: 'Mon Apr 24 2017 11:09:33 GMT-0500 (CDT)',
-      aqi: '67',
-      desc: 'Fair',
-      color: 'yellow'
-    }
-  ]
+  locations: currentHistory || [],
 };
 
 const middleware = [ thunk ]

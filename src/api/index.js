@@ -17,3 +17,15 @@ export function breezoMeter(coords) {
     .then(res => res.json())
     .catch(err => {});
 }
+
+// TODO: catch for bad response
+/*
+BreezoMeter bad response
+{
+  "data_valid": false,
+  "error": {
+    "message": "Provided location is unsupported.",
+    "code": 20
+  }
+}
+*/

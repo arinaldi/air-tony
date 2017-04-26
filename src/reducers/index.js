@@ -8,10 +8,10 @@ function locations(state = [], action) {
           date: action.date,
           name: action.name,
           aqi: action.aqi,
-          desc: action.desc,
+          description: action.description,
           color: action.color
         },
-        ...state
+        ...state.slice(0, 4),
       ];
     default:
       return state;

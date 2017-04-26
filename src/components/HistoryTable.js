@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function formatDate(isoDate) {
+  const date = new Date(isoDate);
+  const newDate = {
+    date: date.toDateString().substring(4),
+    time: date.toLocaleTimeString()
+  };
+  return newDate;
+}
+
 class HistoryTable extends React.Component {
 
   constructor() {
@@ -9,12 +18,23 @@ class HistoryTable extends React.Component {
   }
 
   renderLocation(location, i) {
-    return (
+
+    const circleStyle = {
+      background: location.color
+    };
+
+    const formattedDate = formatDate(location.date);
+    const { date, time } = formattedDate;
+
+     return (
       <tr key={i}>
-        <td>{location.date}</td>
+        <td>{date}<br/>{time}</td>
         <td>{location.name}</td>
         <td>{location.aqi}</td>
-        <td>{location.description}</td>
+        <td>
+          <p className="circle" style={circleStyle}></p> 
+        </td>
+        <td>{location.desc}</td>
       </tr>
     );
   }
@@ -27,6 +47,7 @@ class HistoryTable extends React.Component {
             <th>Date</th>
             <th>Name</th>
             <th>AQI</th>
+            <th>Status</th>
             <th>Description</th>
           </tr>
         </thead>

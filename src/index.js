@@ -12,15 +12,17 @@ const initialState = {
   [
     {
       name: 'Austin, TX, USA',
-      date: '1/1/17',
+      date: 'Tue Apr 25 2017 15:07:18 GMT-0500 (CDT)',
       aqi: '89',
-      desc: 'great'
+      desc: 'great',
+      color: 'green'
     },
     {
       name: 'Paris, France',
-      date: '12/21/00',
+      date: 'Mon Apr 24 2017 11:09:33 GMT-0500 (CDT)',
       aqi: '67',
-      desc: 'Fair'
+      desc: 'Fair',
+      color: 'yellow'
     }
   ]
 };

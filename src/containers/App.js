@@ -1,5 +1,4 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
@@ -25,17 +24,17 @@ const App = props => (
       </div>
     </div>
   </div>
-)
+);
 
 const AppContainer = connect(
   function mapStateToProps(state) {
     return {
-      locations: state.locations
+      locations: state.locations,
     };
   },
   function mapDispatchToProps(dispatch) {
     return bindActionCreators(actions, dispatch);
-  }
+  },
 )(App);
 
 export default AppContainer;

@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class HistoryTable extends React.Component {
 
@@ -16,7 +16,7 @@ class HistoryTable extends React.Component {
         <td>{location.aqi}</td>
         <td>{location.description}</td>
       </tr>
-    )
+    );
   }
 
   render() {
@@ -37,5 +37,9 @@ class HistoryTable extends React.Component {
     );
   }
 }
+
+HistoryTable.propTypes = {
+  locations: PropTypes.array.isRequired,
+};
 
 export default HistoryTable;

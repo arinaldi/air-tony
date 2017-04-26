@@ -12,7 +12,7 @@ function locations(state = [], action) {
           description,
           color,
         },
-        ...state,
+        ...state.slice(0, 4),
       ];
     default:
       return state;

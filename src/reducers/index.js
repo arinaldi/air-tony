@@ -1,18 +1,18 @@
 import { RECEIVE_LOCATION } from '../actions';
 
 function locations(state = [], action) {
-  const { date, name, aqi, desc, color } = action;
-  switch(action.type) {
+  const { date, name, aqi, description, color } = action;
+  switch (action.type) {
     case RECEIVE_LOCATION:
       return [
         {
           date,
           name,
           aqi,
-          desc,
-          color
+          description,
+          color,
         },
-        ...state
+        ...state,
       ];
     default:
       return state;
@@ -21,6 +21,6 @@ function locations(state = [], action) {
 
 export default function rootReducer(state = {}, action) {
   return {
-    locations: locations(state.locations, action)
-  }
+    locations: locations(state.locations, action),
+  };
 }

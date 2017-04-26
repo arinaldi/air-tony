@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
@@ -36,7 +36,7 @@ class HistoryTable extends React.Component {
         </td>
         <td>{location.desc}</td>
       </tr>
-    )
+    );
   }
 
   render() {
@@ -58,5 +58,9 @@ class HistoryTable extends React.Component {
     );
   }
 }
+
+HistoryTable.propTypes = {
+  locations: PropTypes.array.isRequired,
+};
 
 export default HistoryTable;

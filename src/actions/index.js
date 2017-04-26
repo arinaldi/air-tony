@@ -1,4 +1,5 @@
 import { geocodeGoogle, breezoMeter } from '../api';
+import { BOM_API_KEY } from '../constants';
 
 export const RECEIVE_LOCATION = 'RECEIVE_LOCATION';
 
@@ -12,7 +13,7 @@ export function receiveLocation(json) {
     desc,
     color,
   };
-};
+}
 
 export const fetchLocation = location => {
   let name;

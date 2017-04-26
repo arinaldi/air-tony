@@ -1,19 +1,21 @@
 import { geocodeGoogle, breezoMeter } from '../api';
+import { saveToHistory } from '../utilities';
+
 export const RECEIVE_LOCATION = 'RECEIVE_LOCATION';
 
-export function receiveLocation(json) {
-  const { date, name, aqi, desc, color } = json;
+export function receiveLocation(newLocation) {
+  const { date, name, aqi, description, color } = newLocation;
   return {
     type: 'RECEIVE_LOCATION',
     date,
     name,
     aqi,
-    desc,
+    description,
     color,
   };
 }
 
-export const fetchLocation = location => {
+export function fetchLocation(location) {
   let name;
 
   return dispatch => {
@@ -25,18 +27,23 @@ export const fetchLocation = location => {
         const lat = res.results[0].geometry.location.lat;
         const lng = res.results[0].geometry.location.lng;
 
-        return {lat, lng};
+        return { lat, lng };
       })
       .then(coords => breezoMeter(coords))
       .then(res => {
-        const jsonTest = {
+        const newLocation = {
           date: res.datetime,
           name,
           aqi: res.breezometer_aqi,
-          desc: res.breezometer_description,
-          color: res.breezometer_color
+          description: res.breezometer_description,
+          color: res.breezometer_color,
         };
-        dispatch(receiveLocation(jsonTest))
-      });
+        dispatch(receiveLocation(newLocation));
+
+        dispatch(saveToHistory(newLocation));
+      })
+      .catch(err => {
+        //dispatch error state
+      })
     }
 };

@@ -1,8 +1,9 @@
-import { RECEIVE_LOCATION } from '../actions';
+import { combineReducers } from 'redux';
+import { RECEIVE_LOCATION, CHANGE_STATUS } from '../constants';
 
 function locations(state = [], action) {
-  const { date, name, aqi, description, color } = action;
-  switch (action.type) {
+  const { type, date, name, aqi, description, color } = action;
+  switch (type) {
     case RECEIVE_LOCATION:
       return [
         {
@@ -19,8 +20,15 @@ function locations(state = [], action) {
   }
 }
 
-export default function rootReducer(state = {}, action) {
-  return {
-    locations: locations(state.locations, action),
-  };
+function message(state = [], action) {
+  const { type, text, status } = action;
+  switch (type) {
+    case CHANGE_STATUS:
+      return [text, status];
+    default:
+      return state;
+  }
 }
+
+const rootReducer = combineReducers({ locations, message });
+export default rootReducer;

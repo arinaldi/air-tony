@@ -1,5 +1,9 @@
-h1 {
+body {
   margin-top: 10px;
+}
+
+.search {
+  margin-right: 5px;
 }
 
 .circle {
@@ -9,4 +13,19 @@ h1 {
   -moz-border-radius: 20px;
   border-radius: 20px;
   margin-top: 20px;
+}
+
+.big-circle {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  font-size: 2.5em;
+  line-height: 125px;
+  text-align: center;
+}
+
+.current-location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

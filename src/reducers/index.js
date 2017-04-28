@@ -1,15 +1,17 @@
-import { RECEIVE_LOCATION } from '../actions';
+import { combineReducers } from 'redux';
+import { RECEIVE_LOCATION, DISPLAY_SUCCESS, DISPLAY_ERROR, SENDING_MESSAGE } from '../constants';
 
 function locations(state = [], action) {
-  switch(action.type) {
+  const { type, date, name, aqi, description, color } = action;
+  switch (type) {
     case RECEIVE_LOCATION:
       return [
         {
-          date: action.date,
-          name: action.name,
-          aqi: action.aqi,
-          description: action.description,
-          color: action.color
+          date,
+          name,
+          aqi,
+          description,
+          color,
         },
         ...state.slice(0, 4),
       ];
@@ -18,8 +20,17 @@ function locations(state = [], action) {
   }
 }
 
-export default function rootReducer(state = {}, action) {
-  return {
-    locations: locations(state.locations, action)
+function message(state = [], action) {
+  const { type, message, color } = action;
+  switch (type) {
+    case DISPLAY_SUCCESS:
+    case DISPLAY_ERROR:
+    case SENDING_MESSAGE:
+      return [message, color];
+    default:
+      return state;
   }
 }
+
+const rootReducer = combineReducers({ locations, message });
+export default rootReducer;

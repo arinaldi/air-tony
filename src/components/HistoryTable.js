@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatDate } from '../utilities';
+const uuid = require('react-native-uuid');
 
 class HistoryTable extends React.Component {
 
@@ -8,7 +9,7 @@ class HistoryTable extends React.Component {
     this.renderLocation = this.renderLocation.bind(this);
   }
 
-  renderLocation(location, i) {
+  renderLocation(location) {
 
     const circleStyle = {
       background: location.color
@@ -17,8 +18,7 @@ class HistoryTable extends React.Component {
     const formattedDate = formatDate(location.date);
 
      return (
-      // TODO: use UUID
-      <tr key={i}>
+      <tr key={uuid.v1()}>
         <td>{formattedDate.date}<br/>{formattedDate.time}</td>
         <td>{location.name}</td>
         <td>{location.aqi}</td>
@@ -37,7 +37,7 @@ class HistoryTable extends React.Component {
           <tr>
             <th>Date</th>
             <th>Name</th>
-            <th>AQI</th>
+            <th>Air Quality Index</th>
             <th>Status</th>
             <th>Description</th>
           </tr>

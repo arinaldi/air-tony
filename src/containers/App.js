@@ -3,23 +3,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import InputForm from '../components/InputForm';
+import CurrentLocation from '../components/CurrentLocation';
 import HistoryTable from '../components/HistoryTable';
 
 const App = props => (
   <div className="container">
     <div className="row">
-      <div className="twelve columns">
+      <div className="six columns">
         <h1>Air Tony</h1>
-      </div>
-    </div>
-    <div className="row">
-      <div className="twelve columns">
         <InputForm fetchLocation={props.fetchLocation} />
+        <p style={{color: props.message[1]}}>{props.message[0]}</p>
+      </div>
+      <div className="six columns">
+        <CurrentLocation location={props.locations[0]} />
       </div>
     </div>
     <div className="row">
       <div className="twelve columns">
-        <p>Loading or error message</p>
         <HistoryTable locations={props.locations} />
       </div>
     </div>
@@ -29,7 +29,8 @@ const App = props => (
 const AppContainer = connect(
   function mapStateToProps(state) {
     return {
-      locations: state.locations
+      locations: state.locations,
+      message: state.message,
     };
   },
   function mapDispatchToProps(dispatch) {

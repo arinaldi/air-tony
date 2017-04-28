@@ -1,7 +1,7 @@
 export function localStorageTest() {
   try {
-    localStorage.setItem("test", "test");
-    localStorage.removeItem("test");
+    localStorage.setItem('test', 'test');
+    localStorage.removeItem('test');
     return true;
   } catch (error) {
     return false;
@@ -9,9 +9,14 @@ export function localStorageTest() {
 }
 
 export function getHistory() {
-  const item = localStorage.getItem("airTony");
-  const arrayOfObjects = JSON.parse(item);
-  return arrayOfObjects;
+  const item = localStorage.getItem('airTony');
+  if (item) {
+    const arrayOfObjects = JSON.parse(item);
+    return arrayOfObjects;
+  } else {
+    localStorage.setItem('airTony', '');
+    return [];
+  }
 }
 
 export function saveToHistory(newLocation) {
@@ -21,7 +26,7 @@ export function saveToHistory(newLocation) {
   if (currentHistory.length === 5) newHistory.pop();
   newHistory.unshift(newLocation);
   
-  localStorage.setItem("airTony", JSON.stringify(newHistory));
+  localStorage.setItem('airTony', JSON.stringify(newHistory));
 }
 
 export function formatDate(isoDate) {

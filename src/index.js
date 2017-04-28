@@ -13,11 +13,12 @@ let currentHistory;
 if (localStorageTest()) {
   currentHistory = getHistory();
 } else {
-  console.error("Local Storage not available.");
+  console.error('Local Storage not available');
 }
 
 const initialState = {
-  locations: currentHistory || [],
+  locations: currentHistory,
+  message: ['Enter a location', 'black'],
 };
 
 const middleware = [ thunk ]

@@ -12,7 +12,8 @@ class InputForm extends React.Component {
   render() {
     return (
       <form ref="locationForm" onSubmit={this.handleSubmit.bind(this)}>
-        <input className="u-full-width" type="text" placeholder="Enter location" ref="location" />
+        <input className="search" type="text" placeholder="Search" ref="location" />
+        <input type="submit" value="submit" />
       </form>
     );
   }

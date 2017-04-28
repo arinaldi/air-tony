@@ -9,17 +9,22 @@ export function localStorageTest() {
 }
 
 export function getHistory() {
-  const item = localStorage.getItem('airTony');
-  return JSON.parse(item);
+  const history = localStorage.getItem('airTony');
+  if (history) {
+    return JSON.parse(history);
+  } else {
+    localStorage.setItem('airTony', '');
+    return [];
+  }
 }
 
 export function saveToHistory(newLocation) {
   const currentHistory = getHistory();
-  let newHistory = [...currentHistory];
+  const newHistory = [...currentHistory];
 
   if (currentHistory.length === 5) newHistory.pop();
   newHistory.unshift(newLocation);
-  
+
   localStorage.setItem('airTony', JSON.stringify(newHistory));
 }
 
@@ -27,6 +32,17 @@ export function formatDate(isoDate) {
   const date = new Date(isoDate);
   return {
     date: date.toDateString().substring(4),
-    time: date.toLocaleTimeString()
+    time: date.toLocaleTimeString(),
   };
+}
+
+export function changeStatusColor(status) {
+  switch (status) {
+    case 'success':
+      return 'green';
+    case 'error':
+      return 'red';
+    default:
+      return 'black';
+  }
 }

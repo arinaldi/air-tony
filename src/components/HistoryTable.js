@@ -27,9 +27,8 @@ function HistoryTable({ locations }) {
   );
 }
 
-
 HistoryTable.propTypes = {
-  locations: PropTypes.array.isRequired,
+  locations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default HistoryTable;

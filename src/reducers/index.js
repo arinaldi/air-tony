@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_LOCATION, CHANGE_STATUS } from '../constants';
+import {
+  RECEIVE_LOCATION,
+  CHANGE_STATUS,
+} from '../constants';
 
 function locations(state = [], action) {
   const { type, date, name, aqi, description, color } = action;

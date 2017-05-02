@@ -12,10 +12,9 @@ export function getHistory() {
   const history = localStorage.getItem('airTony');
   if (history) {
     return JSON.parse(history);
-  } else {
-    localStorage.setItem('airTony', '');
-    return [];
   }
+  localStorage.setItem('airTony', '');
+  return [];
 }
 
 export function saveToHistory(newLocation) {

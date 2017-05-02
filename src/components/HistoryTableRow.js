@@ -24,7 +24,13 @@ function HistoryTableRow({ location }) {
 }
 
 HistoryTableRow.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    date: PropTypes.string,
+    name: PropTypes.string,
+    aqi: PropTypes.number,
+    description: PropTypes.string,
+    color: PropTypes.string,
+  }).isRequired,
 };
 
 export default HistoryTableRow;

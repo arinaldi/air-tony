@@ -1,33 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CurrentLocation({ location }) {
+function CurrentLocation(props) {
+  const { name, aqi, color } = props.location;
   const circleStyle = {
-    background: location.color,
+    background: color,
   };
 
   return (
     <div className="current-location">
-      <h4>{location.name}</h4>
-      <p className="big-circle" style={circleStyle}>{location.aqi}</p>
+      <h4>{name}</h4>
+      <p className="big-circle" style={circleStyle}>{aqi}</p>
     </div>
   );
 }
 
 CurrentLocation.propTypes = {
   location: PropTypes.shape({
+    date: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     aqi: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   }),
 };
 
 CurrentLocation.defaultProps = {
-  location: PropTypes.shape({
-    name: 'Air Tony',
+  location: {
+    date: '2017-05-02T15:53:39',
+    name: 'Slam dunking air quality',
     aqi: 100,
-    color: 'blue',
-  }),
+    description: 'Great air quality',
+    color: 'lightblue',
+  },
 };
 
 export default CurrentLocation;

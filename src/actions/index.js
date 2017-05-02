@@ -1,6 +1,9 @@
 import { geocodeGoogle, breezoMeter } from '../api';
 import { saveToHistory } from '../utilities';
-import { RECEIVE_LOCATION, CHANGE_STATUS } from '../constants';
+import {
+  RECEIVE_LOCATION,
+  CHANGE_STATUS,
+} from '../constants';
 
 export function receiveLocation(newLocation) {
   const { date, name, aqi, description, color } = newLocation;

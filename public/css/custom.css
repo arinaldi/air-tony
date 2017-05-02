@@ -29,3 +29,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+input[type="submit"]:disabled:hover {
+  cursor: not-allowed;
+}

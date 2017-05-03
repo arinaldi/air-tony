@@ -1,14 +1,14 @@
 import { geocodeGoogle, breezoMeter } from '../api';
 import { saveToHistory } from '../utilities';
 import {
-  RECEIVE_LOCATION,
+  SAVE_LOCATION,
   CHANGE_STATUS,
 } from '../constants';
 
-export function receiveLocation(newLocation) {
+export function saveLocation(newLocation) {
   const { date, name, aqi, description, color } = newLocation;
   return {
-    type: RECEIVE_LOCATION,
+    type: SAVE_LOCATION,
     date,
     name,
     aqi,
@@ -31,23 +31,29 @@ export function fetchLocation(location) {
 
     return geocodeGoogle(location)
       .then((data) => {
-        if (data.status === 'OK') {
-          return data;
+        switch (data.status) {
+          case 'OK':
+            return data;
+          case 'ZERO_RESULTS':
+            return Promise.reject({ message: 'Invalid location' });
+          case 'REQUEST_DENIED':
+            return Promise.reject({ message: data.error_message });
+          default:
+            return Promise.reject({ message: 'Something went wrong' });
         }
-        dispatch(changeStatus('Invalid location', 'error'));
       })
       .then(data => breezoMeter(data))
       .then((data) => {
-        if (data[0] === false) {
-          dispatch(changeStatus('No data for this location', 'error'));
+        if (data.data_valid === false) {
+          dispatch(changeStatus(data.error.message, 'error'));
         } else {
-          dispatch(receiveLocation(data[1]));
+          dispatch(saveLocation(data));
           dispatch(changeStatus('Request succeeded', 'success'));
-          saveToHistory(data[1]);
+          saveToHistory(data);
         }
       })
-      .catch((err) => {
-        dispatch(changeStatus(err.toString(), 'error'));
+      .catch((error) => {
+        dispatch(changeStatus(error.message, 'error'));
       });
   };
 }

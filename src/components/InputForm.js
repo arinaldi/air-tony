@@ -21,7 +21,7 @@ class InputForm extends React.Component {
         inputText: '',
       });
     } else {
-      this.props.changeStatus('Input cannot be empty', 'red');
+      this.props.changeStatus('Input cannot be empty', 'error');
     }
   }
 

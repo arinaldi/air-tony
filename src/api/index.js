@@ -10,22 +10,29 @@ export function geocodeGoogle(location) {
   const url = `${GOOGLE_BASE_URL}?address=${location}&key=${GOOGLE_API_KEY}`;
 
   return fetch(url)
-    .then((res) => {
-      if (res.ok) return res.json();
-      throw new Error('Bad network response');
-    })
+    .then(res => res.json())
     .then((json) => {
-      const name = json.results[0].formatted_address;
-      const lat = json.results[0].geometry.location.lat;
-      const lng = json.results[0].geometry.location.lng;
+      const { results, status } = json;
+      if (results.length > 0) {
+        const name = results[0].formatted_address;
+        const lat = results[0].geometry.location.lat;
+        const lng = results[0].geometry.location.lng;
 
-      return {
-        status: json.status,
-        name,
-        lat,
-        lng,
-      };
-    });
+        return {
+          status,
+          name,
+          lat,
+          lng,
+        };
+      }
+      return json;
+    })
+    .catch(error => Promise.reject(
+      {
+        error,
+        message: `Google error: ${error.message}`,
+      },
+    ));
 }
 
 export function breezoMeter(data) {
@@ -37,15 +44,22 @@ export function breezoMeter(data) {
       throw new Error('Bad network response');
     })
     .then((json) => {
-      return [
-        json.data_valid,
-        {
+      if (json.data_valid) {
+        return {
+          data_valid: json.data_valid,
           date: json.datetime,
           name: data.name,
           aqi: json.breezometer_aqi,
           description: json.breezometer_description,
           color: json.breezometer_color,
-        },
-      ];
-    });
+        };
+      }
+      return json;
+    })
+    .catch(error => Promise.reject(
+      {
+        error,
+        message: `BreezoMeter error: ${error.message}`,
+      },
+    ));
 }

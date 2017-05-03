@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import {
-  RECEIVE_LOCATION,
+  SAVE_LOCATION,
   CHANGE_STATUS,
 } from '../constants';
 
 function locations(state = [], action) {
   const { type, date, name, aqi, description, color } = action;
   switch (type) {
-    case RECEIVE_LOCATION:
+    case SAVE_LOCATION:
       return [
         {
           date,

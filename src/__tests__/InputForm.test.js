@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import InputForm from '../components/InputForm';
 
-describe('<InputForm />', () => {
+describe('InputForm component', () => {
   const fetchLocation = () => {};
   const changeStatus = () => {};
 
